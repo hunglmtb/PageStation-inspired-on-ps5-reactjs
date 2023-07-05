@@ -1,46 +1,28 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-import React, { useCallback, useMemo, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+/* eslint-disable  @typescript-eslint/explicit-function-return-type */
+import React, { useCallback, useMemo, useState } from 'react'
 
-import './styles.css';
-import {
-  FiHome,
-  FiUser,
-  FiBell,
-  FiMic,
-  FiMusic,
-  FiPower,
-  FiUsers,
-  FiVolume2,
-} from 'react-icons/fi';
-import { IoLogoGameControllerB, IoIosSwitch } from 'react-icons/io';
+import './styles.css'
+import { FiHome, FiUser, FiBell, FiMic, FiMusic, FiPower, FiUsers, FiVolume2 } from 'react-icons/fi'
+import { IoLogoGameControllerB, IoIosSwitch } from 'react-icons/io'
 
-import dice from '../../images/Home/dice.jpg';
-import diceIcon from '../../images/Home/diceicon.jpg';
-import chess from '../../images/Home/chess.jpg';
-import chessIcon from '../../images/Home/chessicon.jpg';
-import target from '../../images/Home/target.jpg';
-import targetIcon from '../../images/Home/targeticon.jpg';
+import { useNavigate } from 'react-router-dom'
+import dice from '../../images/Home/dice.jpg'
+import diceIcon from '../../images/Home/diceicon.jpg'
+import chess from '../../images/Home/chess.jpg'
+import chessIcon from '../../images/Home/chessicon.jpg'
+import target from '../../images/Home/target.jpg'
+import targetIcon from '../../images/Home/targeticon.jpg'
 
 const Home: React.FC = () => {
-  const history = useHistory();
-  const [background, setBackground] = useState<string>('background-chess');
-  const [activeType, setActiveType] = useState<'videogame' | 'option'>(
-    'videogame',
-  );
-  const [activePosition, setActivePosition] = useState<number>(0);
+  const navigate = useNavigate()
 
-  const handleNavigateToStart = useCallback(() => {
-    history.push('/');
-  }, [history]);
+  const [background, setBackground] = useState<string>('background-chess')
+  const [activeType, setActiveType] = useState<string>('videogame')
+  const [activePosition, setActivePosition] = useState<number>(0)
 
-  const handleNavigateToUsers = useCallback(() => {
-    history.push('/users');
-  }, [history]);
-
-  const handleNavigateToShutdown = useCallback(() => {
-    history.push('/shutdown');
-  }, [history]);
+  const handleNavigateToStart = useCallback(() => navigate(`/`, { replace: true }), [navigate])
+  const handleNavigateToUsers = () => navigate(`/users`, { replace: true })
+  const handleNavigateToShutdown = () => navigate(`/shutdown`, { replace: true })
 
   const games = useMemo(() => {
     return [
@@ -100,8 +82,8 @@ const Home: React.FC = () => {
         progress: 33,
         label: 'chess',
       },
-    ];
-  }, []);
+    ]
+  }, [])
 
   const options = useMemo(() => {
     return [
@@ -155,17 +137,17 @@ const Home: React.FC = () => {
         icon: <FiPower />,
         navigation: handleNavigateToShutdown,
       },
-    ];
-  }, [handleNavigateToShutdown, handleNavigateToStart, handleNavigateToUsers]);
+    ]
+  }, [handleNavigateToShutdown, handleNavigateToStart, handleNavigateToUsers])
 
   const handleSetActive = useCallback(
-    (type, position) => {
-      setBackground(`background-${games[position].label}`);
-      setActiveType(type);
-      setActivePosition(position);
+    (type: string, position: number) => {
+      setBackground(`background-${games[position].label}`)
+      setActiveType(type)
+      setActivePosition(position)
     },
     [games],
-  );
+  )
 
   return (
     <div className="wrapper-home">
@@ -178,17 +160,11 @@ const Home: React.FC = () => {
               {games.map((game, index) => (
                 <button
                   type="button"
-                  className={`game-card game-${
-                    activePosition === index ? 'active' : 'inactive'
-                  }`}
+                  className={`game-card game-${activePosition === index ? 'active' : 'inactive'}`}
                   onClick={() => handleSetActive('card', index)}
                   key={`${game.name}-${activeType}-${activePosition}`}
                 >
-                  <img
-                    src={game.image}
-                    alt={game.name}
-                    className="background-game"
-                  />
+                  <img src={game.image} alt={game.name} className="background-game" />
 
                   <img src={game.icon} className="game-icon" alt="Game icon" />
 
@@ -209,13 +185,8 @@ const Home: React.FC = () => {
             </div>
 
             <div className="options-list">
-              {options.map(option => (
-                <button
-                  key={option.name}
-                  type="button"
-                  className="option-card"
-                  onClick={option.navigation}
-                >
+              {options.map((option) => (
+                <button key={option.name} type="button" className="option-card" onClick={option.navigation}>
                   {option.icon}
                 </button>
               ))}
@@ -224,7 +195,7 @@ const Home: React.FC = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

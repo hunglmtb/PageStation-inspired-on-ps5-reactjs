@@ -1,38 +1,36 @@
-import React, { useCallback, useEffect } from 'react';
-import { BiSmile } from 'react-icons/bi';
-import { useHistory } from 'react-router-dom';
+/* eslint-disable  @typescript-eslint/explicit-function-return-type */
+import React, { useCallback, useEffect } from 'react'
+import { BiSmile } from 'react-icons/bi'
+import { useNavigate } from 'react-router-dom'
 
-import Particles from 'react-tsparticles';
-import { ISourceOptions } from 'tsparticles';
-import particlesOptions from '../../particles.json';
+import Particles from 'react-tsparticles'
+import { ISourceOptions } from 'tsparticles'
+import particlesOptions from '../../particles.json'
 
-import './styles.css';
+import './styles.css'
 
 const Start: React.FC = () => {
-  const history = useHistory();
-
-  const handleNavigateUsers = useCallback(() => {
-    history.push('users');
-  }, [history]);
+  const navigate = useNavigate()
+  const handleNavigateUsers = () => navigate(`/users`, { replace: true })
 
   const handleUserKeyPress = useCallback(
-    event => {
-      const { keyCode } = event;
+    (event: any) => {
+      const { keyCode } = event
 
       if (keyCode === 32 || keyCode === 13) {
-        history.push('users');
+        navigate(`/users`, { replace: true })
       }
     },
-    [history],
-  );
+    [navigate],
+  )
 
   useEffect(() => {
-    window.addEventListener('keydown', handleUserKeyPress);
+    window.addEventListener('keydown', handleUserKeyPress)
 
     return () => {
-      window.removeEventListener('keydown', handleUserKeyPress);
-    };
-  }, [handleUserKeyPress]);
+      window.removeEventListener('keydown', handleUserKeyPress)
+    }
+  }, [handleUserKeyPress])
 
   return (
     <div className="container">
@@ -51,7 +49,7 @@ const Start: React.FC = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Start;
+export default Start

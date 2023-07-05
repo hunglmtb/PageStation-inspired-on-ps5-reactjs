@@ -1,17 +1,18 @@
-import React, { useCallback, useEffect } from 'react';
-import { FaPowerOff } from 'react-icons/fa';
-import { IoLogoGameControllerB, IoMdApps } from 'react-icons/io';
+/* eslint-disable  @typescript-eslint/explicit-function-return-type */
+import React, { useCallback, useEffect } from 'react'
+import { FaPowerOff } from 'react-icons/fa'
+import { IoLogoGameControllerB, IoMdApps } from 'react-icons/io'
 
-import Particles from 'react-tsparticles';
-import { ISourceOptions } from 'tsparticles';
-import { useHistory } from 'react-router-dom';
-import particlesOptions from '../../particles.json';
+import Particles from 'react-tsparticles'
+import { ISourceOptions } from 'tsparticles'
+import { useNavigate } from 'react-router-dom'
+import particlesOptions from '../../particles.json'
 
-import './styles.css';
+import './styles.css'
 
-import brazil from '../../images/brazil.png';
-import yellowmore from '../../images/yellowmore.png';
-import more from '../../images/more.png';
+import brazil from '../../images/brazil.png'
+import yellowmore from '../../images/yellowmore.png'
+import more from '../../images/more.png'
 
 const users = [
   {
@@ -26,40 +27,33 @@ const users = [
     plus: true,
     active: true,
   },
-];
+]
 
 const Users: React.FC = () => {
-  const history = useHistory();
-
-  const handleNavigateToHome = useCallback(() => {
-    history.push('/home');
-  }, [history]);
-
-  const handleShutdown = useCallback(() => {
-    history.push('/shutdown');
-  }, [history]);
-
+  const navigate = useNavigate()
+  const handleNavigateToHome = () => navigate(`/home`, { replace: true })
+  const handleShutdown = () => navigate(`/shutdown`, { replace: true })
   const handleUserKeyPress = useCallback(
-    event => {
-      const { keyCode } = event;
+    (event: any) => {
+      const { keyCode } = event
 
       if (keyCode === 32 || keyCode === 13) {
-        history.push('/home');
+        navigate(`/home`, { replace: true })
       }
       if (keyCode === 8 || keyCode === 27) {
-        history.goBack();
+        navigate(-1)
       }
     },
-    [history],
-  );
+    [navigate],
+  )
 
   useEffect(() => {
-    window.addEventListener('keydown', handleUserKeyPress);
+    window.addEventListener('keydown', handleUserKeyPress)
 
     return () => {
-      window.removeEventListener('keydown', handleUserKeyPress);
-    };
-  }, [handleUserKeyPress]);
+      window.removeEventListener('keydown', handleUserKeyPress)
+    }
+  }, [handleUserKeyPress])
 
   return (
     <div className="container-users">
@@ -80,37 +74,16 @@ const Users: React.FC = () => {
             </div>
 
             <div className="users-list">
-              {users.map(user => (
-                <div
-                  key={user.name}
-                  className={`user ${
-                    user.active
-                      ? 'active animationContainerUserBig'
-                      : 'inactive animationContainerUserSmall'
-                  }`}
-                >
-                  <button
-                    type="button"
-                    className="avatar-button"
-                    onClick={handleNavigateToHome}
-                  >
+              {users.map((user) => (
+                <div key={user.name} className={`user ${user.active ? 'active animationContainerUserBig' : 'inactive animationContainerUserSmall'}`}>
+                  <button type="button" className="avatar-button" onClick={handleNavigateToHome}>
                     <div className="white-circle">
-                      <img
-                        src={user.avatar}
-                        alt="User Avatar"
-                        className="avatar"
-                      />
+                      <img src={user.avatar} alt="User Avatar" className="avatar" />
                     </div>
                   </button>
                   <div className="username">
                     <span>{user.name}</span>
-                    {user.plus && (
-                      <img
-                        src={yellowmore}
-                        alt="Yellowmore icon"
-                        className="plus"
-                      />
-                    )}
+                    {user.plus && <img src={yellowmore} alt="Yellowmore icon" className="plus" />}
                   </div>
                 </div>
               ))}
@@ -132,7 +105,7 @@ const Users: React.FC = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Users;
+export default Users

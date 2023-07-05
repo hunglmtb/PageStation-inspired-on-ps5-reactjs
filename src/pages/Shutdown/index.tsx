@@ -1,43 +1,41 @@
-import React, { useCallback, useEffect } from 'react';
-import { FiHeart, FiHome } from 'react-icons/fi';
+/* eslint-disable  @typescript-eslint/explicit-function-return-type */
+import React, { useCallback, useEffect } from 'react'
+import { FiHeart, FiHome } from 'react-icons/fi'
 
-import Particles from 'react-tsparticles';
-import { ISourceOptions } from 'tsparticles';
-import { useHistory } from 'react-router-dom';
-import particlesOptions from '../../particles.json';
+import Particles from 'react-tsparticles'
+import { ISourceOptions } from 'tsparticles'
+import { useNavigate } from 'react-router-dom'
+import particlesOptions from '../../particles.json'
 
-import './styles.css';
+import './styles.css'
 
-import game from '../../images/game.png';
+import game from '../../images/game.png'
 
 const Users: React.FC = () => {
-  const history = useHistory();
-
-  const handleNavigateStart = useCallback(() => {
-    history.push('/');
-  }, [history]);
+  const navigate = useNavigate()
+  const handleNavigateStart = () => navigate(`/`, { replace: true })
 
   const handleUserKeyPress = useCallback(
-    event => {
-      const { keyCode } = event;
+    (event: any) => {
+      const { keyCode } = event
 
       if (keyCode === 32 || keyCode === 13) {
-        history.push('/home');
+        navigate(`/home`, { replace: true })
       }
       if (keyCode === 8 || keyCode === 27) {
-        history.goBack();
+        navigate(-1)
       }
     },
-    [history],
-  );
+    [navigate],
+  )
 
   useEffect(() => {
-    window.addEventListener('keydown', handleUserKeyPress);
+    window.addEventListener('keydown', handleUserKeyPress)
 
     return () => {
-      window.removeEventListener('keydown', handleUserKeyPress);
-    };
-  }, [handleUserKeyPress]);
+      window.removeEventListener('keydown', handleUserKeyPress)
+    }
+  }, [handleUserKeyPress])
 
   return (
     <div className="container-shutdown">
@@ -47,10 +45,7 @@ const Users: React.FC = () => {
         <div className="content-shutdown">
           <div className="content-info">
             <h1>Putting your PageStation into rest mode...</h1>
-            <h2>
-              Don&lsquo;t unplug the AC power cord when the power indicator on
-              your PageStation is lit or blinking
-            </h2>
+            <h2>Don&lsquo;t unplug the AC power cord when the power indicator on your PageStation is lit or blinking</h2>
             <div className="home">
               <span className="fan">
                 Made with <FiHeart /> by a fan
@@ -68,7 +63,7 @@ const Users: React.FC = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Users;
+export default Users
