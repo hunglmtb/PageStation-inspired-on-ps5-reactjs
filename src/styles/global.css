@@ -83,3 +83,17 @@ p.citation a {
   color: #1e90ff;
   text-decoration: none;
 }
+
+@font-face {
+  font-family: "CosmicTwo";
+  src: local("CosmicTwo"),
+  url("../fonts/CosmicTwo.ttf") format("truetype");
+  font-weight: bold;
+}
+
+.CosmicTwo{
+  font-family: "CosmicTwo";
+}
+.storeButton{
+  height: 7vw;
+}

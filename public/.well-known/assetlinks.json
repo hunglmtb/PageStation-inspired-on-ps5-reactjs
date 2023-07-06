@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.tbs.fleabagmutt",
+    "sha256_cert_fingerprints":
+    ["B9:40:FF:68:D5:08:AF:B5:A8:12:28:17:14:13:FB:FD:1C:3D:F5:5A:43:2F:5D:17:71:A5:DC:4E:F8:71:EE:D4"]
+  }
+}]
