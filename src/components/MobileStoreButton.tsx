@@ -26,7 +26,6 @@ const MobileStoreButton = ({ store, url, height = 75, width = 255, linkStyles, l
     textDecoration: 'none',
     height: '100%',
     width: '100%',
-    padding: '5px',
     ...linkStyles,
   }
 

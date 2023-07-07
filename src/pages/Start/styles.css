@@ -94,8 +94,10 @@
 
 .start {
   border: 0;
-  position: relative;
+  position: absolute;
   background-color: transparent;
+  left: 5vw;
+  top: 5vw;
 }
 
 .start .icon {
@@ -174,7 +176,7 @@ img.avatar {
   color: black;
 }
 .storeContainer{
-  margin-top: 5px;
+  margin-top: 5vh;
   display: flex;
   justify-content: space-between;
 }
@@ -200,8 +202,62 @@ img.avatar {
 .tos {
   position: absolute;
   width: 100%;
-  margin-top: 5px;
   display: flex;
   justify-content: space-between;
-  bottom: 5px;
+  bottom: 4vh;
+}
+.storeButton{
+  height: 7vw;
+}
+.c-button {
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  background: #4676D7;
+  color: #fff;
+  padding: 8px 16px;
+  font-size: 16px;
+}
+.actionButton {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  margin: 0 0.5rem;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  margin: 0.3rem;
+  border: 0.3rem solid #3550d0;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #3550d0 transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
