@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import Particles from 'react-tsparticles'
 import { ISourceOptions } from 'tsparticles'
-import { isAndroid, isIOS } from 'react-device-detect'
+import { isAndroid, isIOS, isMobileSafari } from 'react-device-detect'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 import particlesOptions from '../../particles.json'
@@ -14,9 +14,9 @@ import a_dog from '../../images/a_dog.png'
 import logo from '../../images/logo.png'
 
 const URLS = {
-  prod: 'catvsdog://com.tbs.fleabagvsmutt',
-  fallbackIosURL: 'https://apps.apple.com/',
-  fallbackAndroidURL: 'https://play.google.com/store',
+  prod: 'catvsdog:/',
+  fallbackIosURL: 'https://apps.apple.com/us/app/cat-vs-dog-classic-fights/id6450649625',
+  fallbackAndroidURL: 'https://play.google.com/store/apps/details?id=com.tbs.fleabagmutt',
 }
 
 const Start: React.FC = () => {
@@ -26,33 +26,39 @@ const Start: React.FC = () => {
   const [loading, setLoading] = useState(false)
 
   const path = useMemo(() => `${URLS.prod}${location.pathname}`, [location.pathname])
-  useEffect(() => {
-    if (isAndroid || !isIOS) {
+
+  const showOpenInApp = isAndroid || (isIOS && !isMobileSafari)
+  /*useEffect(() => {
+    if (isAndroid || (isIOS && !isMobileSafari)) {
       // Try to open the native app when the page is loaded
       // window.location.replace(URLS.prod)
       // Show popup confirmation
       setShowDialogState(true)
     }
-  }, [])
+  }, [])*/
 
   const handleAppRedirect = useCallback(() => {
     // Try to open the when user click in the "confirm" in popup
     setLoading(true)
-    window.location.replace(path)
-    if (isAndroid) {
-      setTimeout(() => {
-        // If the app is not installed,
-        // then the user is redirect to the Play Store
-        window.location.replace(URLS.fallbackAndroidURL)
-        setLoading(false)
-      }, 3000)
-    } else if (isIOS) {
-      setTimeout(() => {
-        // If the app is not installed
-        // then the user is reedirect to the App Store
-        window.location.replace(URLS.fallbackIosURL)
-        setLoading(false)
-      }, 3000)
+    try {
+      window.location.replace(path)
+      setLoading(false)
+    } catch (e) {
+      if (isAndroid) {
+        setTimeout(() => {
+          // If the app is not installed,
+          // then the user is redirect to the Play Store
+          window.location.replace(URLS.fallbackAndroidURL)
+          setLoading(false)
+        }, 1000)
+      } else if (isIOS) {
+        setTimeout(() => {
+          // If the app is not installed
+          // then the user is reedirect to the App Store
+          window.location.replace(URLS.fallbackIosURL)
+          setLoading(false)
+        }, 1000)
+      }
     }
   }, [path])
   return (
@@ -81,7 +87,7 @@ const Start: React.FC = () => {
               store="ios"
               height={'8vw'}
               width={'25vw'}
-              url="https://apps.apple.com/us/app/pyno-chat-history-for-facebook/id1480323938"
+              url={URLS.fallbackIosURL}
               linkProps={{ title: 'Appstore' }}
               className="storeLink"
             />
@@ -89,8 +95,8 @@ const Start: React.FC = () => {
               store="android"
               height={'8vw'}
               width={'25vw'}
-              url="https://apps.apple.com/us/app/pyno-chat-history-for-facebook/id1480323938"
-              linkProps={{ title: 'Appstore' }}
+              url={URLS.fallbackAndroidURL}
+              linkProps={{ title: 'Play Store' }}
               className="storeLink"
             />
           </div>
@@ -147,6 +153,27 @@ const Start: React.FC = () => {
           </button>
         </div>
       </ReactplosiveModal>
+      {showOpenInApp ? (
+        <div className="message-box message-box-info">
+          <div className="appLogo">
+            <img className="appLogoImage" src={logo} alt="dog" />
+          </div>
+          <div className="textContainer">
+            <span className="message-text CosmicTwo">
+              <strong>Cat vs Dog</strong>
+            </span>
+            <span className="message-sub-text CosmicTwo">Open in app Cat vs Dog</span>
+          </div>
+          <button
+            className="c-button CosmicTwo"
+            onClick={() => {
+              handleAppRedirect()
+            }}
+          >
+            OPEN
+          </button>
+        </div>
+      ) : null}
     </div>
   )
 }
