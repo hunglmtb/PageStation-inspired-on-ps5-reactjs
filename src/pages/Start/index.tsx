@@ -40,27 +40,20 @@ const Start: React.FC = () => {
   const handleAppRedirect = useCallback(() => {
     // Try to open the when user click in the "confirm" in popup
     setLoading(true)
-    try {
-      window.location.replace(path)
-      setLoading(false)
-    } catch (e) {
-      if (isAndroid) {
-        setTimeout(() => {
-          // If the app is not installed,
-          // then the user is redirect to the Play Store
-          window.location.replace(URLS.fallbackAndroidURL)
-          setLoading(false)
-        }, 1000)
-      } else if (isIOS) {
-        setTimeout(() => {
-          // If the app is not installed
-          // then the user is reedirect to the App Store
-          window.location.replace(URLS.fallbackIosURL)
-          setLoading(false)
-        }, 1000)
-      }
+    window.location.replace(path)
+    if (isAndroid) {
+      setTimeout(() => {
+        setLoading(false)
+        window.location.replace(URLS.fallbackAndroidURL)
+      }, 1500)
+    } else if (isIOS) {
+      setTimeout(() => {
+        setLoading(false)
+        window.location.replace(URLS.fallbackIosURL)
+      }, 1500)
     }
   }, [path])
+
   return (
     <div className="container">
       <Particles options={particlesOptions as ISourceOptions} />
@@ -164,6 +157,14 @@ const Start: React.FC = () => {
             </span>
             <span className="message-sub-text CosmicTwo">Open in app Cat vs Dog</span>
           </div>
+          {loading ? (
+            <div className="lds-ring">
+              <div />
+              <div />
+              <div />
+              <div />
+            </div>
+          ) : null}
           <button
             className="c-button CosmicTwo"
             onClick={() => {
