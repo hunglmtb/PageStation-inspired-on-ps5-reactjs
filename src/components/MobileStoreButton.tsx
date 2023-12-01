@@ -1,7 +1,7 @@
 import React, { CSSProperties, HTMLAttributes } from 'react'
 
 const imageLinks = {
-  ios: 'https://linkmaker.itunes.apple.com/images/badges/en-us/badge_appstore-lrg.svg',
+  ios: 'https://upload.wikimedia.org/wikipedia/commons/9/91/Download_on_the_App_Store_RGB_blk.svg',
   android: 'https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg',
 }
 type LinkType = keyof typeof imageLinks

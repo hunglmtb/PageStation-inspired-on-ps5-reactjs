@@ -6,7 +6,7 @@
   width: 100%;
   height: 100%;
   position: relative;
-  background-image: url('../../images/bgps5.png');
+  background-image: url('../../images/bg.jpg');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -32,6 +32,7 @@
   text-align: center;
   padding: 0 4vw;
   color: black;
+  margin-top: 4vh;
 }
 
 @keyframes appear {
@@ -96,8 +97,8 @@
   border: 0;
   position: absolute;
   background-color: transparent;
-  left: 5vw;
-  top: 5vw;
+  left: 8vw;
+  top: 8vw;
 }
 
 .start .icon {
@@ -105,8 +106,8 @@
   justify-content: center;
   align-items: center;
   animation: kaboom 4s ease-in-out infinite;
-  height: 64px;
-  width: 64px;
+  height: 100%;
+  width: 100%;
   background-color: #fff;
   border-radius: 50%;
 }
@@ -118,8 +119,8 @@
   left: 0;
   top: 0;
   border-radius: 50%;
-  height: 64px;
-  width: 64px;
+  height: 15vw;
+  width: 15vw;
   z-index: -1;
   background-color: rgba(255, 255, 255, 0.3);
 }
@@ -131,8 +132,8 @@
   left: 0;
   top: 0;
   border-radius: 50%;
-  height: 64px;
-  width: 64px;
+  height: 15vw;
+  width: 15vw;
   z-index: -1;
   background-color: rgba(255, 255, 255, 0.3);
   border: 1px solid #fff;
@@ -153,7 +154,8 @@
 }
 
 .CatVsDogBanner {
-  display: flex;
+  /*display: flex;*/
+  display: none;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -167,8 +169,12 @@
 }
 
 img.avatar {
-  height: 5vw;
+  height: 15vw;
   border-radius: 50%;
+  flex-shrink: 0;
+}
+img.avatarCharacter {
+  height: 5vw;
   flex-shrink: 0;
 }
 .simpleText {
@@ -177,7 +183,7 @@ img.avatar {
   color: black;
 }
 .storeContainer{
-  margin-top: 5vh;
+  margin-top: 2vh;
   display: flex;
   justify-content: space-between;
 }
@@ -328,3 +334,30 @@ element.style {
   border-radius: 10px;
 }
 
+@media screen and (orientation:landscape) {
+  img.avatar {
+    height: 15vh;
+  }
+  .start {
+    left: 8vh;
+    top: 8vh;
+  }
+
+  .start .circle1 {
+    height: 15vh;
+    width: 15vh;
+  }
+
+  .start .circle2 {
+    height: 15vh;
+    width: 15vh;
+  }
+
+  .title {
+    margin-top: 12vh;
+  }
+
+  .storeContainer{
+    margin-top: 5vh;
+  }
+}
