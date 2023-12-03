@@ -75,8 +75,8 @@ const Start: React.FC = () => {
             Cat and Dog are at it again! It&apos;s a windy day and they are throwing stuff over the fence at each other until one of them gives up. Who&apos;s gonna be the winner on this windy day?
           </h1>
           <div className="storeContainer">
-            <MobileStoreButton store="ios" height={'8vw'} width={'25vw'} url={URLS.fallbackIosURL} linkProps={{ title: 'Appstore' }} className="storeLink" />
-            <MobileStoreButton store="android" height={'8vw'} width={'25vw'} url={URLS.fallbackAndroidURL} linkProps={{ title: 'Play Store' }} className="storeLink" />
+            <MobileStoreButton store="ios" height={'6vw'} width={'18vw'} url={URLS.fallbackIosURL} linkProps={{ title: 'Appstore' }} containerStyle={{ padding: '3px' }} className="storeLink" />
+            <MobileStoreButton store="android" height={'6vw'} width={'18vw'} url={URLS.fallbackAndroidURL} linkProps={{ title: 'Play Store' }} className="storeLink" />
           </div>
           <div className="tos CosmicTwo">
             <MobileStoreButton store="Privacy" height={'auto'} width={'50%'} url="/privacy.html" linkStyles={{ textAlign: 'right' }} className="storeLink" />
@@ -120,9 +120,9 @@ const Start: React.FC = () => {
           </div>
           <div className="textContainer">
             <span className="message-text CosmicTwo">
-              <strong>Cat vs Dog</strong>
+              <strong>Dog vs. Cat</strong>
             </span>
-            <span className="message-sub-text CosmicTwo">Open in app Cat vs Dog</span>
+            <span className="message-sub-text CosmicTwo">Open in app Dog vs. Cat</span>
           </div>
           {loading ? (
             <div className="lds-ring">

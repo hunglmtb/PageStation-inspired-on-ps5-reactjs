@@ -13,9 +13,10 @@ interface MobileStoreButtonProp extends HTMLAttributes<HTMLDivElement> {
   width?: number | string
   linkStyles?: CSSProperties
   linkProps?: any
+  containerStyle?: CSSProperties
 }
 
-const MobileStoreButton = ({ store, url, height = 75, width = 255, linkStyles, linkProps, ...props }: MobileStoreButtonProp) => {
+const MobileStoreButton = ({ store, url, height = 75, width = 255, linkStyles, linkProps, containerStyle, ...props }: MobileStoreButtonProp) => {
   const urlLink = imageLinks[store as LinkType]
   const defaultLinkStyles = {
     background: urlLink ? `url(${urlLink}) no-repeat` : '',
@@ -30,7 +31,7 @@ const MobileStoreButton = ({ store, url, height = 75, width = 255, linkStyles, l
   }
 
   return (
-    <div style={{ height, width, display: 'inline-block' }} {...props}>
+    <div style={{ height, width, display: 'inline-block', ...(containerStyle || {}) }} {...props}>
       <a style={defaultLinkStyles} href={url} target="_blank" rel="noopener noreferrer" {...linkProps}>
         {urlLink ? ` ` : store}
       </a>
