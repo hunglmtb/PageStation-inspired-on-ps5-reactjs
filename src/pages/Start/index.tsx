@@ -11,7 +11,8 @@ import ReactplosiveModal from '../../components/ReactplosiveModal/index'
 import './styles.css'
 import a_cat from '../../images/a_cat.png'
 import a_dog from '../../images/a_dog.png'
-import logo from '../../images/logo.png'
+
+const logo = "./logo.png"
 
 const URLS = {
   prod: 'catvsdog:/',
@@ -68,7 +69,7 @@ const Start: React.FC = () => {
         <div className="content">
           <div className="CatVsDogBanner">
             <img src={a_cat} alt="Cat" className="avatarCharacter" />
-            <span className="simpleText CosmicTwo">Cat vs. Dog</span>
+            <span className="simpleText CosmicTwo">Dog vs. Cat</span>
             <img src={a_dog} alt="dog" className="avatarCharacter" />
           </div>
           <h1 className="title CosmicTwo">
