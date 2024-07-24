@@ -12,7 +12,9 @@ import './styles.css'
 import a_cat from '../../images/a_cat.png'
 import a_dog from '../../images/a_dog.png'
 
-const logo = "./logo.png"
+const logo = "/logo.png"
+
+const enableAndroid = false
 
 const URLS = {
   prod: 'catvsdog:/',
@@ -28,7 +30,9 @@ const Start: React.FC = () => {
 
   const path = useMemo(() => `${URLS.prod}${location.pathname}`, [location.pathname])
 
-  const showOpenInApp = isAndroid || (isIOS && !isMobileSafari)
+  const androidProcessEnable = enableAndroid && isAndroid
+
+  const showOpenInApp = androidProcessEnable || (isIOS && !isMobileSafari)
   /*useEffect(() => {
     if (isAndroid || (isIOS && !isMobileSafari)) {
       // Try to open the native app when the page is loaded
@@ -42,7 +46,7 @@ const Start: React.FC = () => {
     // Try to open the when user click in the "confirm" in popup
     setLoading(true)
     window.location.replace(path)
-    if (isAndroid) {
+    if (androidProcessEnable) {
       setTimeout(() => {
         setLoading(false)
         window.location.replace(URLS.fallbackAndroidURL)
@@ -77,7 +81,9 @@ const Start: React.FC = () => {
           </h1>
           <div className="storeContainer">
             <MobileStoreButton store="ios" height={'6vw'} width={'18vw'} url={URLS.fallbackIosURL} linkProps={{ title: 'Appstore' }} containerStyle={{ padding: '3px' }} className="storeLink" />
-            <MobileStoreButton store="android" height={'6vw'} width={'18vw'} url={URLS.fallbackAndroidURL} linkProps={{ title: 'Play Store' }} className="storeLink" />
+            {
+              androidProcessEnable?<MobileStoreButton store="android" height={'6vw'} width={'18vw'} url={URLS.fallbackAndroidURL} linkProps={{ title: 'Play Store' }} className="storeLink" />:null
+            }
           </div>
           <div className="tos CosmicTwo">
             <MobileStoreButton store="Privacy" height={'auto'} width={'50%'} url="/privacy.html" linkStyles={{ textAlign: 'right' }} className="storeLink" />
@@ -93,7 +99,7 @@ const Start: React.FC = () => {
           setShowDialogState(false)
         }}
       >
-        <p className="CosmicTwo">{`If the game is not installed on your phone, you may be redirect to ${isAndroid ? 'Play Store' : isIOS ? 'Appstore' : 'Play Store or Appstore'}`}</p>
+        <p className="CosmicTwo">{`If the game is not installed on your phone, you may be redirect to ${androidProcessEnable ? 'Play Store' : isIOS ? 'Appstore' : 'Play Store or Appstore'}`}</p>
         <br />
         <div className="actionButton">
           {loading ? (

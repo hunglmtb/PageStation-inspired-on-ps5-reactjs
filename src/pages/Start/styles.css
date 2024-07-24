@@ -27,10 +27,10 @@
 }
 
 .title {
-  font-size: 3vw;
+  font-size: 2.5vw;
   letter-spacing: 1px;
   text-align: center;
-  padding: 0 4vw;
+  padding: 0 15vw;
   color: black;
   margin-top: 4vh;
 }
@@ -188,7 +188,7 @@ img.avatarCharacter {
   justify-content: space-between;
 }
 .storeLink {
-  margin: 0 5px;
+  margin: 0 20px;
   text-align: center;
   font-size: 1rem;
 }
